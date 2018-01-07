@@ -70,12 +70,18 @@ export default class AllDocsStud extends React.Component{
             selectedRow2 : false
         })   // ПЕРЕДАТЬ, КАКАЯ ИМЕННО СТРОКА ВЫБРАНА!!!!!
     }
+    getId(){
+        
+    }
 
     render(){
+        let selected = {typeOfDoc : "nothing", index : null}
+
+
 
         let docsGOSTs = gosts.map((gost)=>{   ////список строк (в каждой строке - экземпляр "гост")
         return (
-        <Table.Row >
+        <Table.Row /*onClick={}*/>  {/*НАПИСАТЬ ФУНКЦИЮ, ЧТОБЫ В ПЕРЕМЕННУЮ selected СОХРАНЯЛО ТИП И  ID ДОКУМЕНТА*/}
         <Table.Cell>{gost.name}</Table.Cell>
         </Table.Row>
         );
@@ -83,7 +89,7 @@ export default class AllDocsStud extends React.Component{
 
       let docsTituls = tituls.map((titul)=>{   ////список строк (в каждой строке - экземпляр "титульник")
       return (
-        <Table.Row  >
+        <Table.Row >
         <Table.Cell>{titul.name}</Table.Cell>
         <Table.Cell>{titul.course}</Table.Cell>
         <Table.Cell>{titul.typeOfWork}</Table.Cell>
@@ -100,7 +106,7 @@ export default class AllDocsStud extends React.Component{
         );
         });
 
-
+        console.log(selected.typeOfDoc, selected.index);
 
         let button1 = null;
         let button2 = null;
