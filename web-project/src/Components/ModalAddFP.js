@@ -19,7 +19,7 @@ export default class  ModalAdd extends React.Component{
             Content = <Grid columns = "two" devided> 
                 <Grid.Row>
                     <Grid.Column className="positionOfLeftButton">
-                        <label>Название документа </label>
+                        <Label>Название документа </Label>
                     </Grid.Column>
                     <Grid.Column>
                         <Input />
@@ -27,10 +27,10 @@ export default class  ModalAdd extends React.Component{
                 </Grid.Row>
                 <Grid.Row>
                             <Grid.Column className="positionOfLeftButton">
-                            <label>Загрузить документ</label>
+                            <Label>Загрузить документ</Label>
                             </Grid.Column>
                             <Grid.Column>
-                                <input type = "file" name ="file" size = "50"/>
+                                <Input type = "file" name ="file" size = "50"/>
                             </Grid.Column>
                         </Grid.Row>
                 
@@ -40,7 +40,7 @@ export default class  ModalAdd extends React.Component{
             Content =    <Grid columns = "two" devided> 
                 <Grid.Row>
                     <Grid.Column className="positionOfLeftButton">
-                        <label>Название документа </label>
+                        <Label>Название документа </Label>
                     </Grid.Column>
                     <Grid.Column>
                         <Input />
@@ -49,7 +49,7 @@ export default class  ModalAdd extends React.Component{
            
                 <Grid.Row>
                     <Grid.Column className="positionOfLeftButton">
-                        <label>Тип работы </label>
+                        <Label>Тип работы </Label>
                     </Grid.Column>
                     <Grid.Column>
                         <Dropdown  placeholder = "Тип работы"/>
@@ -57,10 +57,10 @@ export default class  ModalAdd extends React.Component{
                 </Grid.Row>
                 <Grid.Row>
                             <Grid.Column className="positionOfLeftButton">
-                            <label>Загрузить документ</label>
+                            <Label>Загрузить документ</Label>
                             </Grid.Column>
                             <Grid.Column>
-                                <input type = "file" name ="file" size = "50"/>
+                                <Input type = "file" name ="file" size = "50"/>
                             </Grid.Column>
                         </Grid.Row>
                 
@@ -71,7 +71,7 @@ export default class  ModalAdd extends React.Component{
             <Grid columns = "two" devided> 
                 <Grid.Row>
                     <Grid.Column className="positionOfLeftButton">
-                        <label>Название документа </label>
+                        <Label>Название документа </Label>
                     </Grid.Column>
                     <Grid.Column>
                         <Input />
@@ -79,7 +79,7 @@ export default class  ModalAdd extends React.Component{
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column className="positionOfLeftButton">
-                        <label>Курс </label>
+                        <Label>Курс </Label>
                     </Grid.Column>
                     <Grid.Column>
                         <Dropdown  placeholder = "Курс"/>
@@ -87,7 +87,7 @@ export default class  ModalAdd extends React.Component{
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column className="positionOfLeftButton">
-                        <label>Тип работы </label>
+                        <Label>Тип работы </Label>
                     </Grid.Column>
                     <Grid.Column>
                         <Dropdown  placeholder = "Тип работы"/>
@@ -95,7 +95,7 @@ export default class  ModalAdd extends React.Component{
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column className="positionOfLeftButton">
-                        <label>Год</label>
+                        <Label>Год</Label>
                     </Grid.Column>
                     <Grid.Column>
                         <Dropdown  placeholder = "Год"/>
@@ -103,10 +103,10 @@ export default class  ModalAdd extends React.Component{
                 </Grid.Row>
                         <Grid.Row>
                             <Grid.Column className="positionOfLeftButton">
-                            <label>Загрузить документ</label>
+                            <Label>Загрузить документ</Label>
                             </Grid.Column>
                             <Grid.Column>
-                                <input type = "file" name ="file" size = "50"/>
+                                <Input type = "file" name ="file" size = "50"/>
                             </Grid.Column>
                         </Grid.Row>
             </Grid>

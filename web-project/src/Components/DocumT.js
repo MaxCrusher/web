@@ -4,6 +4,8 @@ import AllDocuments from './AllDocuments';
 import ModalAdd from './ModalAddFP';
 import ModalUpdate from './ModalUpdate';
 import ModalDelete from './ModalDelete';
+import GridRow from 'semantic-ui-react/dist/commonjs/collections/Grid/GridRow';
+import GridColumn from 'semantic-ui-react/dist/commonjs/collections/Grid/GridColumn';
 
 
 export default class ChoosingDocumT extends React.Component{
@@ -59,9 +61,10 @@ export default class ChoosingDocumT extends React.Component{
 
        
         let element2 = null;
+        let element1 = null;
 
         if (this.state.allDocuments==true){
-            element2 = <AllDocuments/>
+            element1 = <AllDocuments/>
         }
         else {
 
@@ -87,6 +90,7 @@ export default class ChoosingDocumT extends React.Component{
         return(
             <div>
                 <Grid columns={2} relaxed >
+                <GridRow>
                 <Grid.Column>
                 <Segment basic>
                         <b>Выбор документа: </b>
@@ -117,9 +121,16 @@ export default class ChoosingDocumT extends React.Component{
                     </form>
                 </Segment>
                 </Grid.Column>
+                </GridRow>
+
+                <GridRow>
+                    <GridColumn></GridColumn>
+                    <GridColumn>  {element2}</GridColumn>
+                </GridRow>
+                
             </Grid>
-           
-            {element2}
+           {element1}
+          
             </div>
             
         );

@@ -1,10 +1,12 @@
 import React, {Component} from 'react'
+import AllDocsStud from './AllDocsStud'
+
 
 export default class ChoosingDocumS extends React.Component{
 
     render(){
         return(
-            <p>ВЫБОР ДОКУМЕНТОВ ДЛЯ СТУДЕНТА</p>
+            <AllDocsStud/>
         );
     }
 }

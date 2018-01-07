@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Modal, Grid,  Label, Input, Dropdown } from 'semantic-ui-react'
+import { Button, Modal, Grid,  Label,  Dropdown } from 'semantic-ui-react'
 
 
 export default class  ModalDelete extends React.Component{
@@ -22,7 +22,7 @@ export default class  ModalDelete extends React.Component{
             <Grid columns = "two" devided>
                         <Grid.Row>
                             <Grid.Column className="positionOfLeftButton">
-                                <label>Название</label>
+                                <Label>Название</Label>
                             </Grid.Column>
                             <Grid.Column>
                             <Dropdown placeholder ="Документ"/>

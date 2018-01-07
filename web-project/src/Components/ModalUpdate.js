@@ -23,7 +23,7 @@ export default class  ModalUpdate extends React.Component{
             <Grid columns = "two" devided>
                         <Grid.Row>
                             <Grid.Column className="positionOfLeftButton">
-                                <label>Название документа</label>
+                                <Label>Название документа</Label>
                             </Grid.Column>
                             <Grid.Column>
                             <Dropdown placeholder ="Документ"/>
@@ -31,10 +31,10 @@ export default class  ModalUpdate extends React.Component{
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column className="positionOfLeftButton">
-                            <label>Загрузить документ</label>
+                            <Label>Загрузить документ</Label>
                             </Grid.Column>
                             <Grid.Column>
-                                <input type = "file" name ="file" size = "50"/>
+                                <Input type = "file" name ="file" size = "50"/>
                             </Grid.Column>
                         </Grid.Row>
                        
