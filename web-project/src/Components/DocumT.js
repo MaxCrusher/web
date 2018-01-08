@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {Grid, Segment, Divider} from 'semantic-ui-react';
+import React from 'react'
+import {Grid, Segment} from 'semantic-ui-react';
 import AllDocuments from './AllDocuments';
 import ModalAdd from './ModalAddFP';
 import ModalUpdate from './ModalUpdate';
@@ -7,6 +7,36 @@ import ModalDelete from './ModalDelete';
 import GridRow from 'semantic-ui-react/dist/commonjs/collections/Grid/GridRow';
 import GridColumn from 'semantic-ui-react/dist/commonjs/collections/Grid/GridColumn';
 
+const tituls = 
+    [
+        {id: 0, text: "titul_1", course: "1", typeOfWork: "type_1" , value: 't1'},
+        {id: 1, text: "titul_2", course: "3", typeOfWork: "type_2", value: 't2'},
+        {id: 2, text: "titul_3", course: "2", typeOfWork: "type_2", value: 't3'},
+        {id: 3, text: "titul_4", course: "3", typeOfWork: "type_3", value: 't4'},
+        {id: 4, text: "titul_5", course: "2", typeOfWork: "type_1", value: 't5'},
+        {id: 5, text: "titul_6", course: "4", typeOfWork: "type_4", value: 't6'}
+    ]
+
+const reports = 
+    [
+        {id: 0,text: "report_1", typeOfWork: "type_1", value: 'r1'},
+        {id: 1, text: "report_2", typeOfWork: "type_2", value: 'r2'},
+        {id: 2, text: "report_3", typeOfWork: "type_2", value: 'r3'},
+        {id: 3, text: "report_4", typeOfWork: "type_3", value: 'r4'},
+        {id: 4, text: "report_5", typeOfWork: "type_3", value: 'r5'},
+        {id: 5, text: "report_6", typeOfWork: "type_4", value: 'r6'}
+    ]
+const gosts = 
+    [
+        {id: 0, text: "gost_1", value: 'g1'},
+        {id: 1, text: "gost_2", value: 'g2'},
+        {id: 2, text: "gost_3", value: 'g3'},
+        {id: 3, text: "gost_4", value: 'g4'},
+        {id: 4, text: "gost_5", value: 'g5'},
+        {id: 5, text: "gost_6", value: 'g6'},
+        {id: 6, text: "gost_7", value: 'g7'},
+        {id: 7, text: "gost_8", value: 'g8'}
+    ]
 
 export default class ChoosingDocumT extends React.Component{
 
@@ -64,23 +94,23 @@ export default class ChoosingDocumT extends React.Component{
         let element1 = null;
 
         if (this.state.allDocuments==true){
-            element1 = <AllDocuments/>
+            element1 = <AllDocuments />
         }
         else {
 
             let ds = this.state.document;
             let aas = this.state.activity;
-            if (ds == "standarts" && aas == "add") {element2 =<ModalAdd typeOfDoc = "ГОСТ"/>;}
-            if (ds == "standarts" && aas == "update") element2=<ModalUpdate typeOfDoc = "ГОСТ"/>;
-            if (ds == "standarts" && aas == "delete") element2= <ModalDelete typeOfDoc = "ГОСТ"/>;
+            if (ds == "standarts" && aas == "add") {element2 =<ModalAdd typeOfDoc = "gosts" dataGost = {gosts}/>;}
+            if (ds == "standarts" && aas == "update") element2=<ModalUpdate typeOfDoc = "gosts" dataGost = {gosts}/>;
+            if (ds == "standarts" && aas == "delete") element2= <ModalDelete typeOfDoc = "gosts" dataGost = {gosts}/>;
     
-            if (ds == "reports" && aas == "add") element2= <ModalAdd typeOfDoc = "отчет"/>;
-            if (ds == "reports" && aas == "update") element2=<ModalUpdate typeOfDoc = "отчет"/>;
-            if (ds == "reports" && aas == "delete")element2= <ModalDelete typeOfDoc = "отчет"/>;
+            if (ds == "reports" && aas == "add") element2= <ModalAdd typeOfDoc = "reports" dataReport = {reports}/>;
+            if (ds == "reports" && aas == "update") element2=<ModalUpdate typeOfDoc = "reports" dataReport = {reports}/>;
+            if (ds == "reports" && aas == "delete")element2= <ModalDelete typeOfDoc = "reports" dataReport = {reports}/>;
     
-            if (ds == "frontPages" && aas == "add") element2=<ModalAdd typeOfDoc = "титул"/>;
-            if (ds == "frontPages" && aas == "update")element2= <ModalUpdate typeOfDoc = "титул"/>;
-            if (ds == "frontPages" && aas == "delete") element2=<ModalDelete typeOfDoc = "титул"/>;
+            if (ds == "frontPages" && aas == "add") element2=<ModalAdd typeOfDoc = "tituls" dataTitul = {tituls}/>;
+            if (ds == "frontPages" && aas == "update")element2= <ModalUpdate typeOfDoc = "tituls" dataTitul = {tituls}/>;
+            if (ds == "frontPages" && aas == "delete") element2=<ModalDelete typeOfDoc = "tituls" dataTitul = {tituls}/>;
         }
 
       

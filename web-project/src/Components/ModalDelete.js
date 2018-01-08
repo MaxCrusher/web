@@ -11,13 +11,32 @@ export default class  ModalDelete extends React.Component{
      // ОБРАБОТЧИК ДЛЯ ОТСЫЛКИ ДАННЫХ ( по типу документа (props) подгружать сооствет. тип документа в Dropdown)
 
     render(){
+
+        let m = this.props.typeOfDoc;
+        let header = null;
+
+        let docs = null;
+        if (m== "gosts"){ // ГОСТ
+         docs = this.props.dataGost;
+         header = 'ГОСТа';
+        }
+        else if (m== "reports"){ // ОТЧЕТ
+            docs = this.props.dataReport;
+            header = 'отчета';
+        }
+        else if (m==="tituls"){ //    ТИТУЛЬНИК
+            docs = this.props.dataTitul;
+            header = 'титульного листа';
+          
+        }
+
         return(
             <Modal 
                 trigger={<Button onClick={this.handleOpen}>Удалить </Button>}
                 open={this.state.modalOpen}
                 onClose={this.handleClose}
             >
-            <Modal.Header> Удаление {this.props.typeOfDoc}а </Modal.Header>
+            <Modal.Header> Удаление {header} </Modal.Header>
             <Modal.Content >
             <Grid columns = "two" devided>
                         <Grid.Row>
@@ -25,7 +44,7 @@ export default class  ModalDelete extends React.Component{
                                 <Label>Название</Label>
                             </Grid.Column>
                             <Grid.Column>
-                            <Dropdown placeholder ="Документ"/>
+                            <Dropdown placeholder ="Документ" search selection options= {docs} />
                             </Grid.Column>
                         </Grid.Row>
                         
