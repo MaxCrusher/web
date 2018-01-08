@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import {Grid, GridRow, GridColumn, Table} from 'semantic-ui-react';
+import {Grid, GridRow, GridColumn, Table, Checkbox} from 'semantic-ui-react';
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
 
 const tituls = 
@@ -38,12 +38,11 @@ export default class AllDocsStud extends React.Component{
         this.handleClick1 = this.handleClick1.bind(this);
         this.handleClick2 = this.handleClick2.bind(this);
         this.handleClick3 = this.handleClick3.bind(this);
-   
+        this.handleClick4 = this.handleClick4.bind(this);
         this.state = {
             selectedRow1 : false,
             selectedRow2 : false,
             selectedRow3 : false,
-          
         }
     }
     
@@ -70,6 +69,10 @@ export default class AllDocsStud extends React.Component{
             selectedRow2 : false
         })   // ПЕРЕДАТЬ, КАКАЯ ИМЕННО СТРОКА ВЫБРАНА!!!!!
     }
+    handleClick4 (tit,e){
+        console.log(tit)
+    }
+
     getId(){
         
     }
@@ -90,6 +93,7 @@ export default class AllDocsStud extends React.Component{
       let docsTituls = tituls.map((titul)=>{   ////список строк (в каждой строке - экземпляр "титульник")
       return (
         <Table.Row >
+            <input type = "radio" name = "tit" onClick = {this.handleClick4.bind(this,titul.id)} value = 'titul'/>
         <Table.Cell>{titul.name}</Table.Cell>
         <Table.Cell>{titul.course}</Table.Cell>
         <Table.Cell>{titul.typeOfWork}</Table.Cell>
@@ -106,7 +110,7 @@ export default class AllDocsStud extends React.Component{
         );
         });
 
-        console.log(selected.typeOfDoc, selected.index);
+       // console.log(selected.typeOfDoc, selected.index);
 
         let button1 = null;
         let button2 = null;
@@ -134,6 +138,7 @@ export default class AllDocsStud extends React.Component{
                     <Table celled selectable onClick= {this.handleClick1}>
                         <Table.Header>
                         <Table.Row >
+                        <Table.HeaderCell >Checkbox</Table.HeaderCell>
                             <Table.HeaderCell >Название</Table.HeaderCell>
                             <Table.HeaderCell>Курс</Table.HeaderCell>
                             <Table.HeaderCell>Тип работы</Table.HeaderCell>
@@ -141,6 +146,7 @@ export default class AllDocsStud extends React.Component{
                         </Table.Header>
                     
                         <Table.Body>
+
                             {docsTituls}
                         </Table.Body>
                     </Table>
