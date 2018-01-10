@@ -19,8 +19,8 @@ class App extends Component {
           <Route path="/" component={MyHeader}/>
           <Route exact path="/" component={MainPage}/>
          
-          <Route exact path = "/teacher" component = {ChoosingDocumT}/>
-          <Route exact path = "/student" component = {AllDocsStud}/>
+          <Route exact path = "/teacher" component = {ChoosingDocumT}/> 
+          <Route exact path = "/student" component = {AllDocsStud}/> {/*вызывать обертку TeacherWrapper для этого компонента*/}
           
           <Route path="/" component={MyFooter}/>
         </div>
