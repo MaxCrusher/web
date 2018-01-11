@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {getAllGost} from '../Servises/'
 import { Grid, GridRow, GridColumn, Table, Button, Input } from 'semantic-ui-react';
 
 
@@ -22,7 +22,7 @@ const reports =
         { id: 4, name: "report_5", typeOfWork: "type_3" },
         { id: 5, name: "report_6", typeOfWork: "type_4" }
     ]
-const gosts =
+/*const gosts =
     [
         { id: 0, name: "gost_1" },
         { id: 1, name: "gost_2" },
@@ -30,8 +30,11 @@ const gosts =
         { id: 3, name: "gost_4" },
         { id: 4, name: "gost_5" },
         { id: 5, name: "gost_6" }
-    ]
+    ]*/
 
+var id;
+var name;
+var path;
 var selected = { type: "", index: null }   //ПЕРЕМЕННАЯ, КУДА ЗАПИСЫВАЮТСЯ ДАННЫЕ ДЛЯ ЗАПРОСА НА СЕРВЕР
 export default class AllDocsStud extends React.Component {
 
@@ -41,14 +44,24 @@ export default class AllDocsStud extends React.Component {
         this.state = {
             selectedRow1: false,
             selectedRow2: false,
-            selectedRow3: false,
+            selectedRow3: false, 
+            gosts :[]
+                      
         }
     }
+    componentWillMount(){
+        getAllGost((gostst) =>{
+            this.setState({gosts:gostst});
+        });
+    }
 
-    handleClick4(tit, e) {
+    handleClick4(id,name,path, e) {
         selected.type = e.target.value;  // "gost", "report", "titul"
-        selected.index = tit;
-        console.log(selected.index, selected.type)
+        //selected.index = id;
+        this.id = id;
+        this.name = name;
+        this.path = path;
+        //console.log(id, name, path);
         if (e.target.value === "titul") {
             this.setState({
                 selectedRow1: true,
@@ -75,16 +88,13 @@ export default class AllDocsStud extends React.Component {
 
 
     render() {
-
-
-
-
+        const {gosts} = this.state;
         let docsGOSTs = gosts.map((gost) => {   ////список строк (в каждой строке - экземпляр "гост")
             return (
                 <Table.Row >
                     <Table.Cell>{gost.name}</Table.Cell>
                     <Table.Cell>
-                        <Input type="radio" name="doc" onClick={this.handleClick4.bind(this, gost.id)} value='gost' />
+                        <Input type="radio" name="doc" onClick={this.handleClick4.bind(this, gost.id, gost.name, gost.path)} value='gost' />
                     </Table.Cell>
 
                 </Table.Row>
@@ -130,6 +140,7 @@ export default class AllDocsStud extends React.Component {
         }
         else if (this.state.selectedRow3 == true) { // по щелчку по кнопке передать значение selected на сервер
             button3 = <Button primary >Скачать ГОСТ</Button>
+            {console.log(this.id,this.name,this.path)}
         }
 
 
