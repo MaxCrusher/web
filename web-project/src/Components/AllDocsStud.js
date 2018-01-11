@@ -108,7 +108,7 @@ export default class AllDocsStud extends React.Component {
                     <Table.Cell>{titul.course}</Table.Cell>
                     <Table.Cell>{titul.typeOfWork}</Table.Cell>
                     <Table.Cell>
-                        <Input type="radio" name="doc" onClick={this.handleClick4.bind(this, titul.id)} value='titul' />
+                        <Input type="radio" name="doc" onClick={this.handleClick4.bind(this, titul.id,titul.name, titul.path )} value='titul' />
                     </Table.Cell>
 
                 </Table.Row>
@@ -121,7 +121,7 @@ export default class AllDocsStud extends React.Component {
                     <Table.Cell>{report.name}</Table.Cell>
                     <Table.Cell>{report.typeOfWork}</Table.Cell>
                     <Table.Cell>
-                        <Input type="radio" name="doc" onClick={this.handleClick4.bind(this, report.id)} value='report' />
+                        <Input type="radio" name="doc" onClick={this.handleClick4.bind(this, report.id, report.name, report.path)} value='report' />
                     </Table.Cell>
 
                 </Table.Row>

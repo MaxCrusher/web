@@ -3,6 +3,7 @@ import { Button, Modal, Grid, Label, Input, Dropdown } from 'semantic-ui-react'
 import AllDocsStud from './AllDocsStud';
 
 
+
 const TypesOfWorks = [
     { text: "Курсовой проект", value: "kp" },
     { text: "Расчетно-графическая работа", value: "rgr" },
@@ -19,26 +20,44 @@ const courses = [
     { text: "6 курс", value: "5" }
 ]
 
-
+var typeOfDoc = "";
+var name = "";
 
 
 export default class ModalAdd extends React.Component {
 
-    state = { modalOpen: false }
+    constructor(props) {
+        super(props);
+        this.state = {valueName: '',
+         modalOpen: false
+        };
+        this.handleChange = this.handleChange.bind(this);
+     
+      }
+
+      
+
 
     handleOpen = () => this.setState({ modalOpen: true })
 
     handleClose = () => this.setState({ modalOpen: false })
 
+    handleChange(event) {
+        this.setState({valueName: event.target.value});
+      }
+
 
     // ОБРАБОТЧИК ДЛЯ ОТСЫЛКИ ДАННЫХ 
 
     render() {
+        typeOfDoc  = this.props.typeOfDoc;
+        name = this.state.valueName;
+
         let m = this.props.typeOfDoc;
         let header = null;
 
         let Content = null;
-        if (m === "gosts") { // ГОСТ
+        if (m === "gosts") {                                                                    // ГОСТ           
             header = 'ГОСТа';
             Content = <Grid columns="two" devided>
                 <Grid.Row>
@@ -46,7 +65,7 @@ export default class ModalAdd extends React.Component {
                         <Label>Название документа </Label>
                     </Grid.Column>
                     <Grid.Column>
-                        <Input />
+                        <Input type = "text" value = {this.state.valueName} onChange = {this.handleChange}/>
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
@@ -55,6 +74,7 @@ export default class ModalAdd extends React.Component {
                     </Grid.Column>
                     <Grid.Column>
                         <Input type="file" name="file" size="50" />
+                        
                     </Grid.Column>
                 </Grid.Row>
 
@@ -68,7 +88,7 @@ export default class ModalAdd extends React.Component {
                         <Label>Название документа </Label>
                     </Grid.Column>
                     <Grid.Column>
-                        <Input />
+                        <Input type = "text" value = {this.state.valueName} onChange = {this.handleChange}/>
                     </Grid.Column>
                 </Grid.Row>
 
@@ -100,7 +120,7 @@ export default class ModalAdd extends React.Component {
                             <Label>Название документа </Label>
                         </Grid.Column>
                         <Grid.Column>
-                            <Input />
+                            <Input type = "text" value = {this.state.valueName} onChange = {this.handleChange}/>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
@@ -147,6 +167,7 @@ export default class ModalAdd extends React.Component {
                 <Modal.Header> Добавление  {header}</Modal.Header>
                 <Modal.Content >
                     {Content}
+                    <p>тип документа:{typeOfDoc}, название документа : {name} </p> {/*Переменные для фиксирования названий и типов документа*/}
                 </Modal.Content>
                 <Modal.Actions>
                     <Button primary onClick={this.handleClose}>

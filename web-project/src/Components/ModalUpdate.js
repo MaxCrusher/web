@@ -1,10 +1,16 @@
 import React from 'react'
 import { Button, Modal, Grid,  Label, Input, Dropdown } from 'semantic-ui-react'
+import {getAllGost} from '../Servises/'
 
  var selected = {type :"", value :0}
 export default class  ModalUpdate extends React.Component{
 
-    state = { modalOpen: false }
+    state = { modalOpen: false ,
+        reports:[],
+        gosts: [],
+        tituls:[]
+
+    }
 
     handleOpen = () => this.setState({ modalOpen: true })
   
@@ -14,10 +20,24 @@ export default class  ModalUpdate extends React.Component{
     state = {}
 
     handleChange = (e, {  value }) =>{
-        this.setState({ value });       // получаем value и знаем тип документа .. 
+        this.setState({ value });                                   // получаем value и знаем тип документа .. 
 
     } 
 
+  componentWillMount (){                                                //подгрузка документов для dropdown
+    let typeOfDoc = this.state.typeOfDoc;
+    if (typeOfDoc ==="gosts"){
+        getAllGost((gostst) =>{
+            this.setState({gosts:gostst});
+        });
+    }
+    else if (typeOfDoc ==="tituls"){
+
+    }
+    else if (typeOfDoc === "reports"){
+
+    }
+}
      // ОБРАБОТЧИК ДЛЯ ОТСЫЛКИ ДАННЫХ  ( по типу документа (props) подгружать сооствет. тип документа в Dropdown)
     render(){
 
@@ -26,15 +46,15 @@ export default class  ModalUpdate extends React.Component{
 
         let docs = null;
         if (m== "gosts"){ // ГОСТ
-         docs = this.props.dataGost;
+         docs = this.props.dataGost;  ///// вставить данные, полученные в componentWillMount  docs = this.state.gosts
          header = 'ГОСТа';
         }
         else if (m== "reports"){ // ОТЧЕТ
-            docs = this.props.dataReport;
+            docs = this.props.dataReport;               //docs = this.state.reports
             header = 'отчета';
         }
         else if (m==="tituls"){ //    ТИТУЛЬНИК
-            docs = this.props.dataTitul;
+            docs = this.props.dataTitul;                //docs = this.state.tituls
             header = 'титульного листа';
           
         }
@@ -70,7 +90,7 @@ export default class  ModalUpdate extends React.Component{
                                 <Input type = "file" name ="file" size = "50"/>
                             </Grid.Column>
                         </Grid.Row>
-                        <pre>Current value:  {value}</pre>
+                        <pre>Current value:  {value}, тип документа : {this.props.typeOfDoc}</pre>
                     </Grid>
             </Modal.Content>
             <Modal.Actions>
