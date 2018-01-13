@@ -1,36 +1,7 @@
 import React from 'react'
-import {getAllGost} from '../Servises/'
+import { saveAs } from 'file-saver';
+import {getAllGost, getDoc,getAllTituls, getAllReports} from '../Servises/';
 import { Grid, GridRow, GridColumn, Table, Button, Input } from 'semantic-ui-react';
-
-
-const tituls =
-    [
-        { id: 0, name: "titul_1", course: "1", typeOfWork: "type_1" },
-        { id: 1, name: "titul_2", course: "3", typeOfWork: "type_2" },
-        { id: 2, name: "titul_3", course: "2", typeOfWork: "type_2" },
-        { id: 3, name: "titul_4", course: "3", typeOfWork: "type_3" },
-        { id: 4, name: "titul_5", course: "2", typeOfWork: "type_1" },
-        { id: 5, name: "titul_6", course: "4", typeOfWork: "type_4" }
-    ]
-
-const reports =
-    [
-        { id: 0, name: "report_1", typeOfWork: "type_1" },
-        { id: 1, name: "report_2", typeOfWork: "type_2" },
-        { id: 2, name: "report_3", typeOfWork: "type_2" },
-        { id: 3, name: "report_4", typeOfWork: "type_3" },
-        { id: 4, name: "report_5", typeOfWork: "type_3" },
-        { id: 5, name: "report_6", typeOfWork: "type_4" }
-    ]
-/*const gosts =
-    [
-        { id: 0, name: "gost_1" },
-        { id: 1, name: "gost_2" },
-        { id: 2, name: "gost_3" },
-        { id: 3, name: "gost_4" },
-        { id: 4, name: "gost_5" },
-        { id: 5, name: "gost_6" }
-    ]*/
 
 var id;
 var name;
@@ -41,27 +12,54 @@ export default class AllDocsStud extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick4 = this.handleClick4.bind(this);
+        this.donloading = this.donloading.bind(this);
         this.state = {
             selectedRow1: false,
             selectedRow2: false,
             selectedRow3: false, 
-            gosts :[]
+            gosts :[],
+            tituls: [],
+            reports:[],
+            ex: '',
                       
         }
     }
     componentWillMount(){
+        getAllReports((reportt) =>{
+            this.setState({reports:reportt});
+        });
         getAllGost((gostst) =>{
             this.setState({gosts:gostst});
         });
+
+        getAllTituls((titull)=>{
+            this.setState({tituls:titull});
+        });
+        fetch("/api/gost")
+        .then(res => {
+            
+            return res.json();
+        })
+        
+    }
+    donloading(id,name,table){
+        console.log(id+' '+name+ ' '+table);
+        fetch("/api/gost/download/"+table+"/"+id,{
+            responseType: 'blob'
+        }) .then(res => {
+            res.blob().then(blob=>saveAs(blob, name))
+            })
+    }
+    Cool()
+    {
+        console.log("+++");
     }
 
     handleClick4(id,name,path, e) {
-        selected.type = e.target.value;  // "gost", "report", "titul"
-        //selected.index = id;
+        selected.type = e.target.value; 
         this.id = id;
         this.name = name;
         this.path = path;
-        //console.log(id, name, path);
         if (e.target.value === "titul") {
             this.setState({
                 selectedRow1: true,
@@ -100,13 +98,13 @@ export default class AllDocsStud extends React.Component {
                 </Table.Row>
             );
         });
-
+        const {tituls}= this.state;
         let docsTituls = tituls.map((titul) => {   ////список строк (в каждой строке - экземпляр "титульник")
             return (
                 <Table.Row >
                     <Table.Cell>{titul.name}</Table.Cell>
                     <Table.Cell>{titul.course}</Table.Cell>
-                    <Table.Cell>{titul.typeOfWork}</Table.Cell>
+                    <Table.Cell>{titul.typeowork}</Table.Cell>
                     <Table.Cell>
                         <Input type="radio" name="doc" onClick={this.handleClick4.bind(this, titul.id,titul.name, titul.path )} value='titul' />
                     </Table.Cell>
@@ -114,12 +112,12 @@ export default class AllDocsStud extends React.Component {
                 </Table.Row>
             );
         });
-
+        const {reports} = this.state
         let docsReports = reports.map((report) => {    //список строк (в каждой строке - экземпляр "отчет")
             return (
                 <Table.Row >
                     <Table.Cell>{report.name}</Table.Cell>
-                    <Table.Cell>{report.typeOfWork}</Table.Cell>
+                    <Table.Cell>{report.typeowork}</Table.Cell>
                     <Table.Cell>
                         <Input type="radio" name="doc" onClick={this.handleClick4.bind(this, report.id, report.name, report.path)} value='report' />
                     </Table.Cell>
@@ -133,14 +131,13 @@ export default class AllDocsStud extends React.Component {
         let button3 = null;
 
         if (this.state.selectedRow1 == true) {  // по щелчку по кнопке передать значение selected на сервер
-            button1 = <Button primary>Скачать лист</Button>
+            button1 = <Button primary onClick = {this.donloading(this.id, this.name ,'tituls')}>Скачать лист</Button>
         }
         else if (this.state.selectedRow2 == true) { // по щелчку по кнопке передать значение selected на сервер
-            button2 = <Button primary>Скачать отчет</Button>
+            button2 = <Button primary onClick = {this.donloading(this.id,this.name, 'reports')}>Скачать отчет</Button>
         }
         else if (this.state.selectedRow3 == true) { // по щелчку по кнопке передать значение selected на сервер
-            button3 = <Button primary >Скачать ГОСТ</Button>
-            {console.log(this.id,this.name,this.path)}
+            button3 = <Button primary onClick = {this.donloading(this.id,this.name, 'gosts')}>Скачать ГОСТ</Button>// 
         }
 
 

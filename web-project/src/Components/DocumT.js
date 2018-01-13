@@ -2,10 +2,12 @@ import React from 'react'
 import { Grid, Segment } from 'semantic-ui-react';
 import AllDocuments from './AllDocuments';                          // ВЫЗЫВАТЬ ОБЕРТКУ ДЛЯ КОМПОНЕНТЫ 
 import ModalAdd from './ModalAddFP';
+import TableT from './TableT';
 import ModalUpdate from './ModalUpdate';
 import ModalDelete from './ModalDelete';
 import GridRow from 'semantic-ui-react/dist/commonjs/collections/Grid/GridRow';
 import GridColumn from 'semantic-ui-react/dist/commonjs/collections/Grid/GridColumn';
+
 
 const tituls =
     [
@@ -17,7 +19,7 @@ const tituls =
         { id: 5, text: "titul_6", course: "4", typeOfWork: "type_4", value: 't6' }
     ]
 
-const reports =
+/*const reports =
     [
         { id: 0, text: "report_1", typeOfWork: "type_1", value: 'r1' },
         { id: 1, text: "report_2", typeOfWork: "type_2", value: 'r2' },
@@ -37,7 +39,7 @@ const gosts =
         { id: 6, text: "gost_7", value: 'g7' },
         { id: 7, text: "gost_8", value: 'g8' }
     ]
-
+*/
 export default class ChoosingDocumT extends React.Component {
 
     constructor(props) {
@@ -98,19 +100,31 @@ export default class ChoosingDocumT extends React.Component {
         }
         else {
 
-            let ds = this.state.document;
-            let aas = this.state.activity;
-            if (ds == "standarts" && aas == "add") { element2 = <ModalAdd typeOfDoc="gosts" dataGost={gosts} />; }
+            var ds = this.state.document;
+            var aas = this.state.activity;
+           /* if (ds == "standarts" && aas == "add") { element2 = <ModalAdd typeOfDoc="gosts" dataGost={gosts} />; }
             if (ds == "standarts" && aas == "update") element2 = <ModalUpdate typeOfDoc="gosts" dataGost={gosts} />;
             if (ds == "standarts" && aas == "delete") element2 = <ModalDelete typeOfDoc="gosts" dataGost={gosts} />;
 
             if (ds == "reports" && aas == "add") element2 = <ModalAdd typeOfDoc="reports" dataReport={reports} />;
             if (ds == "reports" && aas == "update") element2 = <ModalUpdate typeOfDoc="reports" dataReport={reports} />;
-            if (ds == "reports" && aas == "delete") element2 = <ModalDelete typeOfDoc="reports" dataReport={reports} />;
+            if (ds == "reports" && aas == "delete") element2 = <ModalDelete typeOfDoc="reports" dataReport={reports} />;*/
 
             if (ds == "frontPages" && aas == "add") element2 = <ModalAdd typeOfDoc="tituls" dataTitul={tituls} />;
             if (ds == "frontPages" && aas == "update") element2 = <ModalUpdate typeOfDoc="tituls" dataTitul={tituls} />;
             if (ds == "frontPages" && aas == "delete") element2 = <ModalDelete typeOfDoc="tituls" dataTitul={tituls} />;
+            if (ds == "standarts" && aas == "add") { element2 = <TableT type = {this.state.document} action ={this.state.activity}/>; }
+            if (ds == "standarts" && aas == "update") element2 = <TableT type = {this.state.document} action ={this.state.activity}/>;
+            if (ds == "standarts" && aas == "delete") element2 = <TableT type = {this.state.document} action ={this.state.activity} />;
+
+            if (ds == "reports" && aas == "add") element2 =  <TableT type = {this.state.document} action ={this.state.activity} />;
+            if (ds == "reports" && aas == "update") element2 =  <TableT type = {this.state.document} action ={this.state.activity} />;
+            if (ds == "reports" && aas == "delete") element2 =  <TableT type = {this.state.document} action ={this.state.activity} />;
+
+           /* if (ds == "frontPages" && aas == "add") element2 =  <TableT type = {this.state.document} action ={this.state.activity} />;
+            if (ds == "frontPages" && aas == "update") element2 =  <TableT type ={this.state.document} action ={this.state.activity} />;
+            if (ds == "frontPages" && aas == "delete") element2 =  <TableT type = {this.state.document} action ={this.state.activity} />;
+ */           
         }
 
 
@@ -153,11 +167,11 @@ export default class ChoosingDocumT extends React.Component {
                         </Grid.Column>
                     </GridRow>
 
-                    <GridRow>
+                   {/*<GridRow>
                         <GridColumn></GridColumn>
                         <GridColumn>  {element2}</GridColumn>
-                    </GridRow>
-
+                    </GridRow>*/}
+                    {element2}
                 </Grid>
                 {element1}
 

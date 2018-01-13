@@ -1,42 +1,30 @@
 import React from 'react';
+import {getAllGost,getAllTituls, getAllReports} from '../Servises/'
 import {Table, Grid, GridRow, GridColumn} from 'semantic-ui-react';
-
-
-    const tituls = 
-    [
-        {id: 0, name: "titul_1", course: "1", typeOfWork: "type_1"},
-        {id: 1, name: "titul_2", course: "3", typeOfWork: "type_2"},
-        {id: 2, name: "titul_3", course: "2", typeOfWork: "type_2"},
-        {id: 3, name: "titul_4", course: "3", typeOfWork: "type_3"},
-        {id: 4, name: "titul_5", course: "2", typeOfWork: "type_1"},
-        {id: 5, name: "titul_6", course: "4", typeOfWork: "type_4"}
-    ]
-
-    const reports = 
-    [
-        {id: 0,name: "report_1", typeOfWork: "type_1"},
-        {id: 1, name: "report_2", typeOfWork: "type_2"},
-        {id: 2, name: "report_3", typeOfWork: "type_2"},
-        {id: 3, name: "report_4", typeOfWork: "type_3"},
-        {id: 4, name: "report_5", typeOfWork: "type_3"},
-        {id: 5, name: "report_6", typeOfWork: "type_4"}
-    ]
-    const gosts = 
-    [
-        {id: 0, name: "gost_1"},
-        {id: 1, name: "gost_2"},
-        {id: 2, name: "gost_3"},
-        {id: 3, name: "gost_4"},
-        {id: 4, name: "gost_5"},
-        {id: 5, name: "gost_6"},
-        {id: 6, name: "gost_7"},
-        {id: 7, name: "gost_8"}
-    ]
-
-
 export default class AllDocuments extends React.Component{
-    render(){
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            gosts :[],
+            tituls: [],
+            reports:[],             
+        }
+    }
+    componentWillMount(){
+        getAllReports((reportt) =>{
+            this.setState({reports:reportt});
+        });
+        getAllGost((gostst) =>{
+            this.setState({gosts:gostst});
+        });
+
+        getAllTituls((titull)=>{
+            this.setState({tituls:titull});
+        });
+    }
+    render(){
+        const {gosts}=this.state;
         let docsGOSTs = gosts.map((gost)=>{   ////список строк (в каждой строке - экземпляр "гост")
         return (
         <Table.Row > 
@@ -44,23 +32,23 @@ export default class AllDocuments extends React.Component{
         </Table.Row>
         );
       });
-
+        const {tituls} = this.state;
       let docsTituls = tituls.map((titul)=>{   ////список строк (в каждой строке - экземпляр "титульник")
       return (
         <Table.Row >
         <Table.Cell>{titul.name}</Table.Cell>
         <Table.Cell>{titul.course}</Table.Cell>
-        <Table.Cell>{titul.typeOfWork}</Table.Cell>
+        <Table.Cell>{titul.typeowork}</Table.Cell>
        
       </Table.Row>
       );
      });
-
+        const {reports}= this.state;
         let  docsReports = reports.map((report)=>{    //список строк (в каждой строке - экземпляр "отчет")
         return (
         <Table.Row >
         <Table.Cell>{report.name}</Table.Cell>
-        <Table.Cell>{report.typeOfWork}</Table.Cell>
+        <Table.Cell>{report.typeowork}</Table.Cell>
         </Table.Row>
         );
         });

@@ -1,4 +1,5 @@
 import React from 'react'
+import {getAllGost, getDoc,getAllTituls, getAllReports} from '../Servises/';
 import { Button, Modal, Grid,  Label,  Dropdown } from 'semantic-ui-react'
 
 
@@ -18,17 +19,23 @@ export default class  ModalDelete extends React.Component{
 
      componentWillMount (){                                                //подгрузка документов для dropdown
         let typeOfDoc = this.state.typeOfDoc;
-        if (typeOfDoc ==="gosts"){
+        //if (typeOfDoc ==="gosts"){
             getAllGost((gostst) =>{
                 this.setState({gosts:gostst});
             });
-        }
+            getAllReports((reportt) =>{
+                this.setState({reports:reportt});
+            });
+            getAllTituls((titull)=>{
+                this.setState({tituls:titull});
+            });
+        /*}
         else if (typeOfDoc ==="tituls"){
     
         }
         else if (typeOfDoc === "reports"){
     
-        }
+        }*/
     }
 
     render(){
@@ -36,11 +43,11 @@ export default class  ModalDelete extends React.Component{
         let m = this.props.typeOfDoc;
         let header = null;
 
-        let docs = null;
-        if (m== "gosts"){ // ГОСТ
-         docs = this.props.dataGost;    ///// вставить данные, полученные в componentWillMount  docs = this.state.gosts
+        //let docs = null;
+        //if (m== "gosts"){ // ГОСТ
+         var docs = this.props.dataTitul;    ///// вставить данные, полученные в componentWillMount  docs = this.state.gosts
          header = 'ГОСТа';
-        }
+        /*}
         else if (m== "reports"){ // ОТЧЕТ
             docs = this.props.dataReport;               //docs = this.state.reports
             header = 'отчета';
@@ -49,8 +56,10 @@ export default class  ModalDelete extends React.Component{
             docs = this.props.dataTitul;                //docs = this.state.tituls
             header = 'титульного листа';
           
-        }
-
+        }*/
+        console.log(this.state.gosts);
+        docs = this.props.dataTitul;
+        console.log(docs);
         return(
             <Modal 
                 trigger={<Button onClick={this.handleOpen}>Удалить </Button>}
@@ -65,7 +74,7 @@ export default class  ModalDelete extends React.Component{
                                 <Label>Название</Label>
                             </Grid.Column>
                             <Grid.Column>
-                            <Dropdown placeholder ="Документ" search selection options= {docs} />
+                            <Dropdown placeholder ="Документ" fluid search selection options= {docs} />
                             </Grid.Column>
                         </Grid.Row>
                         

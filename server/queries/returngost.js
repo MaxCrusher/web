@@ -1,6 +1,6 @@
 
 var mySql = require('mysql');
-var gosts =[];
+var mas =[];
 var connection = mySql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -23,13 +23,44 @@ connection.connect(function(error){
         }
         else{
             console.log('cool');
-            gosts=rows;
+            mas=rows;
+            console.log(rows);
           
         }
     });
-    function getAllGostList(){
-        return gosts;
+    connection.query("SELECT * FROM tituls;", function(error, rows){
+        if(!!error){
+            console.log('error');      
+        }
+        else{
+            console.log('cool');
+            mas=rows;
+            console.log(rows);
+          
+        }
+    });
+    connection.query("SELECT * FROM reports;", function(error, rows){
+        if(!!error){
+            console.log('error');      
+        }
+        else{
+            console.log('cool');
+            mas=rows;
+            console.log(rows);
+          
+        }
+    });
+        function getAllGostList(){
+        return mas;
+    };
+    function getAllTutulList(){
+        return mas;
+    };
+    function getAllReportList(){
+        return mas;
     };
     module.exports = {
-        getAllGostList: getAllGostList
+        getAllGostList: getAllGostList,
+        getAllReportList: getAllReportList,
+        getAllTutulList: getAllTutulList
     };
