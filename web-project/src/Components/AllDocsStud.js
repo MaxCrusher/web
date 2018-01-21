@@ -1,6 +1,6 @@
 import React from 'react'
 import { saveAs } from 'file-saver';
-import {getAllGost, getDoc,getAllTituls, getAllReports} from '../Servises/';
+import { getAllGost, getDoc, getAllTituls, getAllReports } from '../Servises/';
 import { Grid, GridRow, GridColumn, Table, Button, Input } from 'semantic-ui-react';
 
 var id;
@@ -16,47 +16,46 @@ export default class AllDocsStud extends React.Component {
         this.state = {
             selectedRow1: false,
             selectedRow2: false,
-            selectedRow3: false, 
-            gosts :[],
+            selectedRow3: false,
+            gosts: [],
             tituls: [],
-            reports:[],
+            reports: [],
             ex: '',
-                      
+
         }
     }
-    componentWillMount(){
-        getAllReports((reportt) =>{
-            this.setState({reports:reportt});
+    componentWillMount() {
+        getAllReports((reportt) => {
+            this.setState({ reports: reportt });
         });
-        getAllGost((gostst) =>{
-            this.setState({gosts:gostst});
+        getAllGost((gostst) => {
+            this.setState({ gosts: gostst });
         });
 
-        getAllTituls((titull)=>{
-            this.setState({tituls:titull});
+        getAllTituls((titull) => {
+            this.setState({ tituls: titull });
         });
         fetch("/api/gost")
-        .then(res => {
-            
-            return res.json();
-        })
-        
-    }
-    donloading(id,name,table){
-        console.log(id+' '+name+ ' '+table);
-        fetch("/api/gost/download/"+table+"/"+id,{
-            responseType: 'blob'
-        }) .then(res => {
-            res.blob().then(blob=>saveAs(blob, name))
+            .then(res => {
+
+                return res.json();
             })
+
     }
-    Cool()
-    {
+    donloading(id, name, table) {
+        console.log(id + ' ' + name + ' ' + table);
+        fetch("/api/gost/download/" + table + "/" + id, {
+            responseType: 'blob'
+        }).then(res => 
+            res.blob()
+        ).then(blob => saveAs(blob, name));
+    }
+    Cool() {
         console.log("+++");
     }
 
-    handleClick4(id,name,path, e) {
-        selected.type = e.target.value; 
+    handleClick4(id, name, path, e) {
+        selected.type = e.target.value;
         this.id = id;
         this.name = name;
         this.path = path;
@@ -86,7 +85,7 @@ export default class AllDocsStud extends React.Component {
 
 
     render() {
-        const {gosts} = this.state;
+        const { gosts } = this.state;
         let docsGOSTs = gosts.map((gost) => {   ////список строк (в каждой строке - экземпляр "гост")
             return (
                 <Table.Row >
@@ -98,7 +97,7 @@ export default class AllDocsStud extends React.Component {
                 </Table.Row>
             );
         });
-        const {tituls}= this.state;
+        const { tituls } = this.state;
         let docsTituls = tituls.map((titul) => {   ////список строк (в каждой строке - экземпляр "титульник")
             return (
                 <Table.Row >
@@ -106,13 +105,13 @@ export default class AllDocsStud extends React.Component {
                     <Table.Cell>{titul.course}</Table.Cell>
                     <Table.Cell>{titul.typeowork}</Table.Cell>
                     <Table.Cell>
-                        <Input type="radio" name="doc" onClick={this.handleClick4.bind(this, titul.id,titul.name, titul.path )} value='titul' />
+                        <Input type="radio" name="doc" onClick={this.handleClick4.bind(this, titul.id, titul.name, titul.path)} value='titul' />
                     </Table.Cell>
 
                 </Table.Row>
             );
         });
-        const {reports} = this.state
+        const { reports } = this.state
         let docsReports = reports.map((report) => {    //список строк (в каждой строке - экземпляр "отчет")
             return (
                 <Table.Row >
@@ -131,13 +130,13 @@ export default class AllDocsStud extends React.Component {
         let button3 = null;
 
         if (this.state.selectedRow1 == true) {  // по щелчку по кнопке передать значение selected на сервер
-            button1 = <Button primary onClick = {this.donloading(this.id, this.name ,'tituls')}>Скачать лист</Button>
+            button1 = <Button primary onClick={this.donloading(this.id, this.name, 'tituls')}>Скачать лист</Button>
         }
         else if (this.state.selectedRow2 == true) { // по щелчку по кнопке передать значение selected на сервер
-            button2 = <Button primary onClick = {this.donloading(this.id,this.name, 'reports')}>Скачать отчет</Button>
+            button2 = <Button primary onClick={this.donloading(this.id, this.name, 'reports')}>Скачать отчет</Button>
         }
         else if (this.state.selectedRow3 == true) { // по щелчку по кнопке передать значение selected на сервер
-            button3 = <Button primary onClick = {this.donloading(this.id,this.name, 'gosts')}>Скачать ГОСТ</Button>// 
+            button3 = <Button primary onClick={this.donloading(this.id, this.name, 'gosts')}>Скачать ГОСТ</Button>// 
         }
 
 
