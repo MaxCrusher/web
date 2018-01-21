@@ -140,8 +140,6 @@ export default class AllDocsStud extends React.Component {
         }
 
 
-
-
         return (
 
             <Grid columns="three" devided>
