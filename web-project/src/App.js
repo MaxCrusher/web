@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import MyHeader from './Components/Header';
 import MyFooter from './Components/Footer';
 import MainPage from './Components/mainPage';
-import ChoosingDocumT from './Components/DocumT';
+import ChoosingDocumT from './Components/Teacher/DocumT';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css';
 import './Components/styles.css';
 import { BrowserRouter as Router,  Route} from 'react-router-dom';
 
-import AllDocsStud from './Components/AllDocsStud'
+import AllDocsStud from './Components/Students/AllDocsStud'
 
 
 class App extends Component {

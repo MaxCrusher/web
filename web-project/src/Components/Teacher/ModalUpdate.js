@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Modal, Grid,  Label, Input, Dropdown } from 'semantic-ui-react'
-import {getAllGost} from '../Servises/'
+import {getAllGost} from '../../Servises/'
 
  var selected = {type :"", value :0}
 export default class  ModalUpdate extends React.Component{
@@ -14,31 +14,13 @@ export default class  ModalUpdate extends React.Component{
 
     handleOpen = () => this.setState({ modalOpen: true })
   
-    handleClose = () => this.setState({ modalOpen: false })
-
-   
-    state = {}
+    handleClose = () => this.setState({ modalOpen: false, value: 0 })
 
     handleChange = (e, {  value }) =>{
         this.setState({ value });                                   // получаем value и знаем тип документа .. 
 
     } 
 
-  componentWillMount (){                                                //подгрузка документов для dropdown
-    let typeOfDoc = this.state.typeOfDoc;
-    if (typeOfDoc ==="gosts"){
-        getAllGost((gostst) =>{
-            this.setState({gosts:gostst});
-        });
-    }
-    else if (typeOfDoc ==="tituls"){
-
-    }
-    else if (typeOfDoc === "reports"){
-
-    }
-}
-     // ОБРАБОТЧИК ДЛЯ ОТСЫЛКИ ДАННЫХ  ( по типу документа (props) подгружать сооствет. тип документа в Dropdown)
     render(){
 
         let m = this.props.typeOfDoc;
@@ -46,15 +28,15 @@ export default class  ModalUpdate extends React.Component{
 
         let docs = null;
         if (m== "gosts"){ // ГОСТ
-         docs = this.props.dataGost;  ///// вставить данные, полученные в componentWillMount  docs = this.state.gosts
+         docs = this.props.dataGost;
          header = 'ГОСТа';
         }
         else if (m== "reports"){ // ОТЧЕТ
-            docs = this.props.dataReport;               //docs = this.state.reports
+            docs = this.props.dataReport;
             header = 'отчета';
         }
         else if (m==="tituls"){ //    ТИТУЛЬНИК
-            docs = this.props.dataTitul;                //docs = this.state.tituls
+            docs = this.props.dataTitul;                
             header = 'титульного листа';
           
         }
@@ -102,7 +84,6 @@ export default class  ModalUpdate extends React.Component{
               </Button>
             </Modal.Actions>
           </Modal>
-
         );
     }
 }

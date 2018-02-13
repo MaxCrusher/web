@@ -1,11 +1,11 @@
 import React from 'react'
 import { saveAs } from 'file-saver';
-import { getAllGost, getDoc, getAllTituls, getAllReports } from '../Servises/';
+import { getAllGost, getDoc, getAllTituls, getAllReports } from '../../Servises/';
 import { Grid, GridRow, GridColumn, Table, Button, Input } from 'semantic-ui-react';
 
-var id;
-var name;
-var path;
+let id;
+let name;
+let path;
 var selected = { type: "", index: null }   //ПЕРЕМЕННАЯ, КУДА ЗАПИСЫВАЮТСЯ ДАННЫЕ ДЛЯ ЗАПРОСА НА СЕРВЕР
 export default class AllDocsStud extends React.Component {
 
@@ -20,8 +20,6 @@ export default class AllDocsStud extends React.Component {
             gosts: [],
             tituls: [],
             reports: [],
-            ex: '',
-
         }
     }
     componentWillMount() {
@@ -35,27 +33,21 @@ export default class AllDocsStud extends React.Component {
         getAllTituls((titull) => {
             this.setState({ tituls: titull });
         });
-        fetch("/api/gost")
-            .then(res => {
-
-                return res.json();
-            })
 
     }
-    donloading(id, name, table) {
-        console.log(id + ' ' + name + ' ' + table);
-        fetch("/api/gost/download/" + table + "/" + id, {
+    donloading(id, name, table,e) {
+        console.log(id);
+        {console.log(id + ' ' + name + ' ' + table);}
+        fetch("/api/download/" + table + "/" + id, {
             responseType: 'blob'
         }).then(res => 
             res.blob()
         ).then(blob => saveAs(blob, name));
     }
-    Cool() {
-        console.log("+++");
-    }
 
     handleClick4(id, name, path, e) {
         selected.type = e.target.value;
+        console.log(id);
         this.id = id;
         this.name = name;
         this.path = path;
@@ -83,7 +75,6 @@ export default class AllDocsStud extends React.Component {
 
     }
 
-
     render() {
         const { gosts } = this.state;
         let docsGOSTs = gosts.map((gost) => {   ////список строк (в каждой строке - экземпляр "гост")
@@ -93,7 +84,6 @@ export default class AllDocsStud extends React.Component {
                     <Table.Cell>
                         <Input type="radio" name="doc" onClick={this.handleClick4.bind(this, gost.id, gost.name, gost.path)} value='gost' />
                     </Table.Cell>
-
                 </Table.Row>
             );
         });
@@ -107,7 +97,6 @@ export default class AllDocsStud extends React.Component {
                     <Table.Cell>
                         <Input type="radio" name="doc" onClick={this.handleClick4.bind(this, titul.id, titul.name, titul.path)} value='titul' />
                     </Table.Cell>
-
                 </Table.Row>
             );
         });
@@ -120,30 +109,27 @@ export default class AllDocsStud extends React.Component {
                     <Table.Cell>
                         <Input type="radio" name="doc" onClick={this.handleClick4.bind(this, report.id, report.name, report.path)} value='report' />
                     </Table.Cell>
-
                 </Table.Row>
             );
         });
-
+        let vt = "qwert";
         let button1 = null;
         let button2 = null;
         let button3 = null;
-
         if (this.state.selectedRow1 == true) {  // по щелчку по кнопке передать значение selected на сервер
-            button1 = <Button primary onClick={this.donloading(this.id, this.name, 'tituls')}>Скачать лист</Button>
+            button1 = <Button primary onClick={this.donloading.bind(this, this.id, this.name, 'tituls')}>Скачать лист</Button>//onClick={this.donloading(this.id, this.name, 'tituls')}
         }
         else if (this.state.selectedRow2 == true) { // по щелчку по кнопке передать значение selected на сервер
-            button2 = <Button primary onClick={this.donloading(this.id, this.name, 'reports')}>Скачать отчет</Button>
+            button2 = <Button primary onClick={this.donloading.bind(this, this.id, this.name, 'reports')}>Скачать отчет</Button>
         }
         else if (this.state.selectedRow3 == true) { // по щелчку по кнопке передать значение selected на сервер
-            button3 = <Button primary onClick={this.donloading(this.id, this.name, 'gosts')}>Скачать ГОСТ</Button>// 
+            button3 = <Button primary onClick={this.donloading.bind(this, this.id, this.name, 'gosts')}>Скачать ГОСТ</Button>// 
         }
 
 
         return (
 
             <Grid columns="three" devided>
-
                 <GridRow>
                     <GridColumn>
                         <b>Титульные листы</b>
@@ -156,9 +142,7 @@ export default class AllDocsStud extends React.Component {
                                     <Table.HeaderCell >Выбор</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
-
                             <Table.Body>
-
                                 {docsTituls}
                             </Table.Body>
                         </Table>
@@ -175,7 +159,6 @@ export default class AllDocsStud extends React.Component {
                                     <Table.HeaderCell >Выбор</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
-
                             <Table.Body>
                                 {docsReports}
                             </Table.Body>
@@ -192,13 +175,11 @@ export default class AllDocsStud extends React.Component {
                                     <Table.HeaderCell >Выбор</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
-
                             <Table.Body>
                                 {docsGOSTs}
                             </Table.Body>
                         </Table>
                         {button3}
-
                     </GridColumn>
                 </GridRow>
             </Grid>

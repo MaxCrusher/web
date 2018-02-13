@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Modal, Grid, Label, Input, Dropdown } from 'semantic-ui-react'
-import AllDocsStud from './AllDocsStud';
+import AllDocsStud from '../Students/AllDocsStud';
 
 
 
@@ -17,7 +17,7 @@ const courses = [
     { text: "3 курс", value: "3" },
     { text: "4 курс", value: "4" },
     { text: "5 курс", value: "5" },
-    { text: "6 курс", value: "5" }
+    { text: "6 курс", value: "6" }
 ]
 
 var typeOfDoc = "";

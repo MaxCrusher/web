@@ -1,5 +1,5 @@
 import React from 'react';
-import {getAllGost,getAllTituls, getAllReports} from '../Servises/'
+import {getAllGost,getAllTituls, getAllReports} from '../../Servises/'
 import {Table, Grid, GridRow, GridColumn} from 'semantic-ui-react';
 export default class AllDocuments extends React.Component{
 
@@ -23,6 +23,7 @@ export default class AllDocuments extends React.Component{
             this.setState({tituls:titull});
         });
     }
+    
     render(){
         const {gosts}=this.state;
         let docsGOSTs = gosts.map((gost)=>{   ////список строк (в каждой строке - экземпляр "гост")

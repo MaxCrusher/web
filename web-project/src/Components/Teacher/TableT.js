@@ -1,5 +1,5 @@
 import React from 'react';
-import {getAllGost,getAllTituls, getAllReports} from '../Servises/'
+import {getAllGost,getAllTituls, getAllReports} from '../../Servises/'
 import {Table, Grid, GridRow, GridColumn, Input} from 'semantic-ui-react';
 var table;
 var id;

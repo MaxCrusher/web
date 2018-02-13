@@ -1,5 +1,5 @@
 export const getAllGost = (success) => {
-        fetch("/api/gost")
+        fetch("/api/gosts")
             .then(res => {
                 
                 return res.json();// res.json()
@@ -10,7 +10,7 @@ export const getAllGost = (success) => {
             });
 };
 export const getAllTituls = (success) => {
-    fetch("/api/titul")
+    fetch("/api/tituls")
         .then(res => {
             return res.json()
         }).then(titul => {
@@ -20,7 +20,7 @@ export const getAllTituls = (success) => {
         });
 };
 export const getAllReports = (success) => {
-    fetch("/api/report")
+    fetch("/api/reports")
         .then(res => {
             return res.json()
         }).then(report => {
